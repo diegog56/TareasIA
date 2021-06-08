@@ -17,6 +17,10 @@
 // B - Limpio                               | B - Limpio (aspiradora)                  |
 // -------------------------------------------------------------------------------------
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 before_states = []
 
 function dirty(state){
@@ -56,7 +60,7 @@ function reset_states(){
     this.before_states = []
 }
 
-function iterate(init_state){
+async function iterate(init_state){
     reset_states()
     test = current = init_state
     ok = true
@@ -80,7 +84,7 @@ function iterate(init_state){
             before_states.push(current)
             path.push(String(current))
         }
-        
+        await this.sleep(3000)
     }
 }
 
